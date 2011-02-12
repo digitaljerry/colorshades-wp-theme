@@ -10,7 +10,7 @@ Template Name: Links Page
 
 <?php the_post() ?>
 
-			<div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
+			<div id="post-<?php the_ID() ?>" class="<?php coloshades_post_class() ?>">
 				<h2 class="entry-title"><?php the_title() ?></h2>
 				<div class="entry-content">
 <?php the_content() ?>
@@ -19,7 +19,7 @@ Template Name: Links Page
 <?php wp_list_bookmarks('title_before=<h3>&title_after=</h3>&category_before=<li id="page-%id" class="%class">&after=</li>') ?>
 
 					</ul>
-<?php edit_post_link( __( 'Edit', 'sandbox' ), '<span class="edit-link">', '</span>' ) ?>
+<?php edit_post_link( __( 'Edit', 'coloshades' ), '<span class="edit-link">', '</span>' ) ?>
 
 				</div>
 			</div><!-- .post -->

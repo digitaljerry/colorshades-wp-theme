@@ -5,12 +5,12 @@
 	<meta http-equiv="content-type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url') ?>" />
 <?php wp_head() // For plugins ?>
-	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
-	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
+	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'coloshades' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
+	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'coloshades' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
 </head>
 
-<body class="<?php sandbox_body_class() ?>">
+<body class="<?php coloshades_body_class() ?>">
 
 <div id="wrapper" class="hfeed">
 
@@ -20,6 +20,6 @@
 	</div><!--  #header -->
 
 	<div id="access">
-		<div class="skip-link"><a href="#content" title="<?php _e( 'Skip to content', 'sandbox' ) ?>"><?php _e( 'Skip to content', 'sandbox' ) ?></a></div>
-		<?php sandbox_globalnav() ?>
+		<div class="skip-link"><a href="#content" title="<?php _e( 'Skip to content', 'coloshades' ) ?>"><?php _e( 'Skip to content', 'coloshades' ) ?></a></div>
+		<?php coloshades_globalnav() ?>
 	</div><!-- #access -->

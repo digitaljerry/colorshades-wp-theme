@@ -1,16 +1,16 @@
 <?php
 /*
-This file is part of SANDBOX.
+This file is part of coloshades.
 
-SANDBOX is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
+coloshades is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
 
-SANDBOX is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+coloshades is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with SANDBOX. If not, see http://www.gnu.org/licenses/.
+You should have received a copy of the GNU General Public License along with coloshades. If not, see http://www.gnu.org/licenses/.
 */
 
 // Produces a list of pages in the header without whitespace
-function sandbox_globalnav() {
+function coloshades_globalnav() {
 	if ( $menu = str_replace( array( "\r", "\n", "\t" ), '', wp_list_pages('title_li=&sort_column=menu_order&echo=0') ) )
 		$menu = '<ul>' . $menu . '</ul>';
 	$menu = '<div id="menu">' . $menu . "</div>\n";
@@ -18,14 +18,14 @@ function sandbox_globalnav() {
 }
 
 // Generates semantic classes for BODY element
-function sandbox_body_class( $print = true ) {
+function coloshades_body_class( $print = true ) {
 	global $wp_query, $current_user;
 
 	// It's surely a WordPress blog, right?
 	$c = array('wordpress');
 
 	// Applies the time- and date-based classes (below) to BODY element
-	sandbox_date_classes( time(), $c );
+	coloshades_date_classes( time(), $c );
 
 	// Generic semantic classes for what type of content is displayed
 	is_front_page()  ? $c[] = 'home'       : null; // For the front page, if set
@@ -47,7 +47,7 @@ function sandbox_body_class( $print = true ) {
 
 		// Adds classes for the month, day, and hour when the post was published
 		if ( isset( $wp_query->post->post_date ) )
-			sandbox_date_classes( mysql2date( 'U', $wp_query->post->post_date ), $c, 's-' );
+			coloshades_date_classes( mysql2date( 'U', $wp_query->post->post_date ), $c, 's-' );
 
 		// Adds category classes for each category on single posts
 		if ( $cats = get_the_category() )
@@ -154,11 +154,11 @@ function sandbox_body_class( $print = true ) {
 }
 
 // Generates semantic classes for each post DIV element
-function sandbox_post_class( $print = true ) {
-	global $post, $sandbox_post_alt;
+function coloshades_post_class( $print = true ) {
+	global $post, $coloshades_post_alt;
 
 	// hentry for hAtom compliace, gets 'alt' for every other post DIV, describes the post type and p[n]
-	$c = array( 'hentry', "p$sandbox_post_alt", $post->post_type, $post->post_status );
+	$c = array( 'hentry', "p$coloshades_post_alt", $post->post_type, $post->post_status );
 
 	// Author for the post queried
 	$c[] = 'author-' . sanitize_title_with_dashes(strtolower(get_the_author('login')));
@@ -180,10 +180,10 @@ function sandbox_post_class( $print = true ) {
 		$c[] = 'protected';
 
 	// Applies the time- and date-based classes (below) to post DIV
-	sandbox_date_classes( mysql2date( 'U', $post->post_date ), $c );
+	coloshades_date_classes( mysql2date( 'U', $post->post_date ), $c );
 
 	// If it's the other to the every, then add 'alt' class
-	if ( ++$sandbox_post_alt % 2 )
+	if ( ++$coloshades_post_alt % 2 )
 		$c[] = 'alt';
 
 	// Separates classes with a single space, collates classes for post DIV
@@ -194,20 +194,20 @@ function sandbox_post_class( $print = true ) {
 }
 
 // Define the num val for 'alt' classes (in post DIV and comment LI)
-$sandbox_post_alt = 1;
+$coloshades_post_alt = 1;
 
 // Generates semantic classes for each comment LI element
-function sandbox_comment_class( $print = true ) {
-	global $comment, $post, $sandbox_comment_alt;
+function coloshades_comment_class( $print = true ) {
+	global $comment, $post, $coloshades_comment_alt;
 
 	// Collects the comment type (comment, trackback),
 	$c = array( $comment->comment_type );
 
 	// Counts trackbacks (t[n]) or comments (c[n])
 	if ( $comment->comment_type == 'comment' ) {
-		$c[] = "c$sandbox_comment_alt";
+		$c[] = "c$coloshades_comment_alt";
 	} else {
-		$c[] = "t$sandbox_comment_alt";
+		$c[] = "t$coloshades_comment_alt";
 	}
 
 	// If the comment author has an id (registered), then print the log in name
@@ -221,8 +221,8 @@ function sandbox_comment_class( $print = true ) {
 	}
 
 	// If it's the other to the every, then add 'alt' class; collects time- and date-based classes
-	sandbox_date_classes( mysql2date( 'U', $comment->comment_date ), $c, 'c-' );
-	if ( ++$sandbox_comment_alt % 2 )
+	coloshades_date_classes( mysql2date( 'U', $comment->comment_date ), $c, 'c-' );
+	if ( ++$coloshades_comment_alt % 2 )
 		$c[] = 'alt';
 
 	// Separates classes with a single space, collates classes for comment LI
@@ -233,7 +233,7 @@ function sandbox_comment_class( $print = true ) {
 }
 
 // Generates time- and date-based classes for BODY, post DIVs, and comment LIs; relative to GMT (UTC)
-function sandbox_date_classes( $t, &$c, $p = '' ) {
+function coloshades_date_classes( $t, &$c, $p = '' ) {
 	$t = $t + ( get_option('gmt_offset') * 3600 );
 	$c[] = $p . 'y' . gmdate( 'Y', $t ); // Year
 	$c[] = $p . 'm' . gmdate( 'm', $t ); // Month
@@ -242,7 +242,7 @@ function sandbox_date_classes( $t, &$c, $p = '' ) {
 }
 
 // For category lists on category archives: Returns other categories except the current one (redundant)
-function sandbox_cats_meow($glue) {
+function coloshades_cats_meow($glue) {
 	$current_cat = single_cat_title( '', false );
 	$separator = "\n";
 	$cats = explode( $separator, get_the_category_list($separator) );
@@ -259,7 +259,7 @@ function sandbox_cats_meow($glue) {
 }
 
 // For tag lists on tag archives: Returns other tags except the current one (redundant)
-function sandbox_tag_ur_it($glue) {
+function coloshades_tag_ur_it($glue) {
 	$current_tag = single_tag_title( '', '',  false );
 	$separator = "\n";
 	$tags = explode( $separator, get_the_tag_list( "", "$separator", "" ) );
@@ -276,7 +276,7 @@ function sandbox_tag_ur_it($glue) {
 }
 
 // Produces an avatar image with the hCard-compliant photo class
-function sandbox_commenter_link() {
+function coloshades_commenter_link() {
 	$commenter = get_comment_author_link();
 	if ( ereg( '<a[^>]* class=[^>]+>', $commenter ) ) {
 		$commenter = ereg_replace( '(<a[^>]* class=[\'"]?)', '\\1url ' , $commenter );
@@ -290,7 +290,7 @@ function sandbox_commenter_link() {
 }
 
 // Function to filter the default gallery shortcode
-function sandbox_gallery($attr) {
+function coloshades_gallery($attr) {
 	global $post;
 	if ( isset($attr['orderby']) ) {
 		$attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
@@ -356,12 +356,12 @@ function sandbox_gallery($attr) {
 	return $output;
 }
 
-// Widget: Search; to match the Sandbox style and replace Widget plugin default
-function widget_sandbox_search($args) {
+// Widget: Search; to match the coloshades style and replace Widget plugin default
+function widget_coloshades_search($args) {
 	extract($args);
-	$options = get_option('widget_sandbox_search');
-	$title = empty($options['title']) ? __( 'Search', 'sandbox' ) : attribute_escape($options['title']);
-	$button = empty($options['button']) ? __( 'Find', 'sandbox' ) : attribute_escape($options['button']);
+	$options = get_option('widget_coloshades_search');
+	$title = empty($options['title']) ? __( 'Search', 'coloshades' ) : attribute_escape($options['title']);
+	$button = empty($options['button']) ? __( 'Find', 'coloshades' ) : attribute_escape($options['button']);
 ?>
 			<?php echo $before_widget ?>
 				<?php echo $before_title ?><label for="s"><?php echo $title ?></label><?php echo $after_title ?>
@@ -376,30 +376,30 @@ function widget_sandbox_search($args) {
 }
 
 // Widget: Search; element controls for customizing text within Widget plugin
-function widget_sandbox_search_control() {
-	$options = $newoptions = get_option('widget_sandbox_search');
+function widget_coloshades_search_control() {
+	$options = $newoptions = get_option('widget_coloshades_search');
 	if ( $_POST['search-submit'] ) {
 		$newoptions['title'] = strip_tags(stripslashes( $_POST['search-title']));
 		$newoptions['button'] = strip_tags(stripslashes( $_POST['search-button']));
 	}
 	if ( $options != $newoptions ) {
 		$options = $newoptions;
-		update_option( 'widget_sandbox_search', $options );
+		update_option( 'widget_coloshades_search', $options );
 	}
 	$title = attribute_escape($options['title']);
 	$button = attribute_escape($options['button']);
 ?>
-	<p><label for="search-title"><?php _e( 'Title:', 'sandbox' ) ?> <input class="widefat" id="search-title" name="search-title" type="text" value="<?php echo $title; ?>" /></label></p>
-	<p><label for="search-button"><?php _e( 'Button Text:', 'sandbox' ) ?> <input class="widefat" id="search-button" name="search-button" type="text" value="<?php echo $button; ?>" /></label></p>
+	<p><label for="search-title"><?php _e( 'Title:', 'coloshades' ) ?> <input class="widefat" id="search-title" name="search-title" type="text" value="<?php echo $title; ?>" /></label></p>
+	<p><label for="search-button"><?php _e( 'Button Text:', 'coloshades' ) ?> <input class="widefat" id="search-button" name="search-button" type="text" value="<?php echo $button; ?>" /></label></p>
 	<input type="hidden" id="search-submit" name="search-submit" value="1" />
 <?php
 }
 
-// Widget: Meta; to match the Sandbox style and replace Widget plugin default
-function widget_sandbox_meta($args) {
+// Widget: Meta; to match the coloshades style and replace Widget plugin default
+function widget_coloshades_meta($args) {
 	extract($args);
 	$options = get_option('widget_meta');
-	$title = empty($options['title']) ? __( 'Meta', 'sandbox' ) : attribute_escape($options['title']);
+	$title = empty($options['title']) ? __( 'Meta', 'coloshades' ) : attribute_escape($options['title']);
 ?>
 			<?php echo $before_widget; ?>
 				<?php echo $before_title . $title . $after_title; ?>
@@ -414,45 +414,45 @@ function widget_sandbox_meta($args) {
 <?php
 }
 
-// Widget: RSS links; to match the Sandbox style
-function widget_sandbox_rsslinks($args) {
+// Widget: RSS links; to match the coloshades style
+function widget_coloshades_rsslinks($args) {
 	extract($args);
-	$options = get_option('widget_sandbox_rsslinks');
-	$title = empty($options['title']) ? __( 'RSS Links', 'sandbox' ) : attribute_escape($options['title']);
+	$options = get_option('widget_coloshades_rsslinks');
+	$title = empty($options['title']) ? __( 'RSS Links', 'coloshades' ) : attribute_escape($options['title']);
 ?>
 		<?php echo $before_widget; ?>
 			<?php echo $before_title . $title . $after_title; ?>
 			<ul>
-				<li><a href="<?php bloginfo('rss2_url') ?>" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?> <?php _e( 'Posts RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'sandbox' ) ?></a></li>
-				<li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php echo wp_specialchars(bloginfo('name'), 1) ?> <?php _e( 'Comments RSS feed', 'sandbox' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'sandbox' ) ?></a></li>
+				<li><a href="<?php bloginfo('rss2_url') ?>" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?> <?php _e( 'Posts RSS feed', 'coloshades' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'coloshades' ) ?></a></li>
+				<li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php echo wp_specialchars(bloginfo('name'), 1) ?> <?php _e( 'Comments RSS feed', 'coloshades' ); ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'coloshades' ) ?></a></li>
 			</ul>
 		<?php echo $after_widget; ?>
 <?php
 }
 
 // Widget: RSS links; element controls for customizing text within Widget plugin
-function widget_sandbox_rsslinks_control() {
-	$options = $newoptions = get_option('widget_sandbox_rsslinks');
+function widget_coloshades_rsslinks_control() {
+	$options = $newoptions = get_option('widget_coloshades_rsslinks');
 	if ( $_POST['rsslinks-submit'] ) {
 		$newoptions['title'] = strip_tags( stripslashes( $_POST['rsslinks-title'] ) );
 	}
 	if ( $options != $newoptions ) {
 		$options = $newoptions;
-		update_option( 'widget_sandbox_rsslinks', $options );
+		update_option( 'widget_coloshades_rsslinks', $options );
 	}
 	$title = attribute_escape($options['title']);
 ?>
-	<p><label for="rsslinks-title"><?php _e( 'Title:', 'sandbox' ) ?> <input class="widefat" id="rsslinks-title" name="rsslinks-title" type="text" value="<?php echo $title; ?>" /></label></p>
+	<p><label for="rsslinks-title"><?php _e( 'Title:', 'coloshades' ) ?> <input class="widefat" id="rsslinks-title" name="rsslinks-title" type="text" value="<?php echo $title; ?>" /></label></p>
 	<input type="hidden" id="rsslinks-submit" name="rsslinks-submit" value="1" />
 <?php
 }
 
 // Widgets plugin: intializes the plugin after the widgets above have passed snuff
-function sandbox_widgets_init() {
+function coloshades_widgets_init() {
 	if ( !function_exists('register_sidebars') )
 		return;
 
-	// Formats the Sandbox widgets, adding readability-improving whitespace
+	// Formats the coloshades widgets, adding readability-improving whitespace
 	$p = array(
 		'before_widget'  =>   "\n\t\t\t" . '<li id="%1$s" class="widget %2$s">',
 		'after_widget'   =>   "\n\t\t\t</li>\n",
@@ -463,41 +463,41 @@ function sandbox_widgets_init() {
 	// Table for how many? Two? This way, please.
 	register_sidebars( 2, $p );
 
-	// Finished intializing Widgets plugin, now let's load the Sandbox default widgets; first, Sandbox search widget
+	// Finished intializing Widgets plugin, now let's load the coloshades default widgets; first, coloshades search widget
 	$widget_ops = array(
 		'classname'    =>  'widget_search',
-		'description'  =>  __( "A search form for your blog (Sandbox)", "sandbox" )
+		'description'  =>  __( "A search form for your blog (coloshades)", "coloshades" )
 	);
-	wp_register_sidebar_widget( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search', $widget_ops );
-	unregister_widget_control('search'); // We're being Sandbox-specific; remove WP default
-	wp_register_widget_control( 'search', __( 'Search', 'sandbox' ), 'widget_sandbox_search_control' );
+	wp_register_sidebar_widget( 'search', __( 'Search', 'coloshades' ), 'widget_coloshades_search', $widget_ops );
+	unregister_widget_control('search'); // We're being coloshades-specific; remove WP default
+	wp_register_widget_control( 'search', __( 'Search', 'coloshades' ), 'widget_coloshades_search_control' );
 
-	// Sandbox Meta widget
+	// coloshades Meta widget
 	$widget_ops = array(
 		'classname'    =>  'widget_meta',
-		'description'  =>  __( "Log in/out and administration links (Sandbox)", "sandbox" )
+		'description'  =>  __( "Log in/out and administration links (coloshades)", "coloshades" )
 	);
-	wp_register_sidebar_widget( 'meta', __( 'Meta', 'sandbox' ), 'widget_sandbox_meta', $widget_ops );
-	unregister_widget_control('meta'); // We're being Sandbox-specific; remove WP default
-	wp_register_widget_control( 'meta', __( 'Meta', 'sandbox' ), 'wp_widget_meta_control' );
+	wp_register_sidebar_widget( 'meta', __( 'Meta', 'coloshades' ), 'widget_coloshades_meta', $widget_ops );
+	unregister_widget_control('meta'); // We're being coloshades-specific; remove WP default
+	wp_register_widget_control( 'meta', __( 'Meta', 'coloshades' ), 'wp_widget_meta_control' );
 
-	//Sandbox RSS Links widget
+	//coloshades RSS Links widget
 	$widget_ops = array(
 		'classname'    =>  'widget_rss_links',
-		'description'  =>  __( "RSS links for both posts and comments (Sandbox)", "sandbox" )
+		'description'  =>  __( "RSS links for both posts and comments (coloshades)", "coloshades" )
 	);
-	wp_register_sidebar_widget( 'rss_links', __( 'RSS Links', 'sandbox' ), 'widget_sandbox_rsslinks', $widget_ops );
-	wp_register_widget_control( 'rss_links', __( 'RSS Links', 'sandbox' ), 'widget_sandbox_rsslinks_control' );
+	wp_register_sidebar_widget( 'rss_links', __( 'RSS Links', 'coloshades' ), 'widget_coloshades_rsslinks', $widget_ops );
+	wp_register_widget_control( 'rss_links', __( 'RSS Links', 'coloshades' ), 'widget_coloshades_rsslinks_control' );
 }
 
 // Translate, if applicable
-load_theme_textdomain('sandbox');
+load_theme_textdomain('coloshades');
 
 // Runs our code at the end to check that everything needed has loaded
-add_action( 'init', 'sandbox_widgets_init' );
+add_action( 'init', 'coloshades_widgets_init' );
 
 // Registers our function to filter default gallery shortcode
-add_filter( 'post_gallery', 'sandbox_gallery', $attr );
+add_filter( 'post_gallery', 'coloshades_gallery', $attr );
 
 // Adds filters for the description/meta content in archives.php
 add_filter( 'archive_meta', 'wptexturize' );
@@ -505,5 +505,5 @@ add_filter( 'archive_meta', 'convert_smilies' );
 add_filter( 'archive_meta', 'convert_chars' );
 add_filter( 'archive_meta', 'wpautop' );
 
-// Remember: the Sandbox is for play.
+// Remember: the coloshades is for play.
 ?>
