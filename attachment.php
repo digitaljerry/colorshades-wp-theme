@@ -5,6 +5,9 @@
 
 <?php the_post() ?>
 
+			<div class="outer_content">
+				<div class="content">
+
 			<h2 class="page-title"><a href="<?php echo get_permalink($post->post_parent) ?>" title="<?php printf( __( 'Return to %s', 'coloshades' ), wp_specialchars( get_the_title($post->post_parent), 1 ) ) ?>" rev="attachment"><?php echo get_the_title($post->post_parent) ?></a></h2>
 
 			<div id="post-<?php the_ID() ?>" class="<?php coloshades_post_class() ?>">
@@ -41,6 +44,9 @@
 			</div><!-- .post -->
 
 <?php comments_template() ?>
+
+				</div>
+			</div>
 
 		</div><!-- #content -->
 	</div><!-- #container -->

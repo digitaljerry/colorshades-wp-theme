@@ -2,6 +2,9 @@
 
 	<div id="container">
 		<div id="content">
+		
+			<div class="outer_content">
+				<div class="content">
 
 			<div id="post-0" class="post error404 not-found">
 				<h2 class="entry-title"><?php _e( 'Not Found', 'colorshades' ) ?></h2>
@@ -15,6 +18,9 @@
 					</div>
 				</form>
 			</div><!-- .post -->
+			
+				</div>
+			</div>
 
 		</div><!-- #content -->
 	</div><!-- #container -->

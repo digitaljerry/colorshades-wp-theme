@@ -8,9 +8,6 @@ AUTHOR URI: http://nej.si
 TAGS: colors, colorlovers, kuler
 */
 
-/* Two-column with sidebar on left from the /examples/ folder  */
-@import url("examples/1c-l.css");
-
 /* ColorShades swatches */
 @import url("style_swatches.css");
 
@@ -29,7 +26,7 @@ div.outer_content {
 }
 
 div.content {
-	width: 510px;
+	width: 560px;
 	margin: auto;
 	/*position: relative;*/
 	padding: 30px 30px 30px 30px;
@@ -37,6 +34,18 @@ div.content {
 
 div.content img {
 	max-width: 90%;
+}
+
+ul#newtagcloud {
+	list-style: none;
+	padding: 0;
+	width: 450px;
+	text-align: center;
+	padding-left:30px;
+}
+
+h2.page-title {
+	text-align: center;
 }
 
 /* Just some example content */
@@ -60,25 +69,31 @@ h1#blog-title a {
 }
 
 div#menu {
-	height: 1.5em;
-	margin: 1em 0;
-	width: 100%;
-	text-align: center;
-	padding-top: 3px;
+	float:right;
+	position:relative;
+	left:-50%;
+	text-align:left;
+	padding-top: 25px;
 }
 
 div#menu ul,div#menu ul ul {
-	line-height: 1;
-	list-style: none;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+	list-style:none; 
+	position:relative;
+	left:50%;
 }
 
 div#menu ul a {
 	display: block;
 	margin-right: 1em;
-	padding: 0.2em 0.5em;
+	text-decoration: none;
+	float:left;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-decoration: underline;
+	font-size: 18px;
+}
+
+div#menu ul a:hover {
 	text-decoration: none;
 }
 
@@ -184,22 +199,16 @@ div.gallery dl.gallery-columns-5 {
 	width: 19%;
 }
 
-div#nav-above {
-	margin-bottom: 1em;
-}
+div#nav-above {}
 
-div#nav-below {
-	margin-top: 1em;
-}
+div#nav-below {}
 
 div#nav-images {
 	height: 150px;
 	margin: 1em 0;
 }
 
-div.navigation {
-	height: 1.25em;
-}
+div.navigation {}
 
 div.navigation div.nav-next {
 	float: right;
@@ -217,7 +226,7 @@ div.sidebar input#s {
 div.sidebar li {
 	list-style: none;
 	margin: 0;
-	padding-bottom: 0.8em;
+	padding-bottom: 0.7em;
 }
 
 div.sidebar li h3 {
@@ -238,7 +247,7 @@ div.sidebar ul ul {
 
 div.sidebar ul ul li {
 	list-style: disc;
-	width: 164px;
+	width: 181px;
 	float: left;
 }
 
@@ -253,6 +262,11 @@ div.sidebar ul ul ul li {
 div#menu ul li,div.gallery dl,div.navigation div.nav-previous {
 	float: left;
 }
+
+div#menu ul li{
+	float:left;
+	position:relative;
+}/* ie needs position:relative here*/
 
 div#header,div#footer {
 	text-align: center;
