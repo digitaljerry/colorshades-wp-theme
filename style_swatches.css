@@ -1,0 +1,39 @@
+body>div#swatch_container {
+	position: fixed;
+	width: 104px;
+	z-index: 100;
+	right: 20px;
+	top: 10px;
+	margin: auto;
+	border: 0;
+	height: 135px;
+}
+
+#swatches {
+	height: 100px;
+	overflow: hidden;
+}
+
+.swatch {
+	width: 20px;
+	height: 20px;
+	float: left;
+}
+
+.swatch_holder {
+	border: 1px solid white;
+	background: #000;
+	color: #fff;	
+	padding: 1px;
+	height: 20px;
+	margin-bottom: 1px;
+	position: relative;
+}
+
+.scroller {
+	width: 104px;
+	text-align: center;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	cursor: pointer;
+}

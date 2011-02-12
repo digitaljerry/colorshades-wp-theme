@@ -9,7 +9,35 @@ TAGS: colors, colorlovers, kuler
 */
 
 /* Two-column with sidebar on left from the /examples/ folder  */
-@import url("examples/2c-l.css");
+@import url("examples/1c-l.css");
+
+/* ColorShades swatches */
+@import url("style_swatches.css");
+
+body {
+	color: black;
+	margin: 0px;
+	background: white;
+	font-family: 'Lucida Grande', Helvetica, sans-serif;
+	width: 100%;
+}
+
+/* ColorShades content wrappers */
+
+div.outer_content {
+	width: 100%;
+}
+
+div.content {
+	width: 510px;
+	margin: auto;
+	/*position: relative;*/
+	padding: 30px 30px 30px 30px;
+}
+
+div.content img {
+	max-width: 90%;
+}
 
 /* Just some example content */
 div.skip-link {
@@ -18,18 +46,33 @@ div.skip-link {
 	top: 1em;
 }
 
+h1#blog-title {
+	padding: 25px 0px 25px 0px;
+	margin: 0px;
+	text-align: center;
+	font: Normal 65px Georgia, serif;
+	line-height: 60px;
+	letter-spacing: -1px;
+}
+
+h1#blog-title a {
+	text-decoration: none;
+}
+
 div#menu {
-	background: #EEE;
 	height: 1.5em;
 	margin: 1em 0;
 	width: 100%;
+	text-align: center;
+	padding-top: 3px;
 }
 
 div#menu ul,div#menu ul ul {
 	line-height: 1;
 	list-style: none;
-	margin: 0;
-	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 div#menu ul a {
@@ -57,7 +100,7 @@ div#menu ul li:hover ul {
 }
 
 div#container,div#primary {
-	margin-top: 2em;
+	display: block;
 }
 
 form#commentform .form-label {
@@ -168,12 +211,17 @@ div.sidebar h3 {
 }
 
 div.sidebar input#s {
-	width: 7em;
+	width: 85%;
 }
 
 div.sidebar li {
 	list-style: none;
-	margin: 0 0 2em;
+	margin: 0;
+	padding-bottom: 0.8em;
+}
+
+div.sidebar li h3 {
+	padding-bottom: 1em;
 }
 
 div.sidebar li form {
@@ -183,11 +231,15 @@ div.sidebar li form {
 
 div.sidebar ul ul {
 	margin: 0 0 0 1em;
+	padding-bottom: 2em;
+	display: block;
+	clear: both;
 }
 
 div.sidebar ul ul li {
 	list-style: disc;
-	margin: 0;
+	width: 164px;
+	float: left;
 }
 
 div.sidebar ul ul ul {
@@ -211,6 +263,7 @@ input#author,input#email,input#url,div.navigation div {
 }
 
 div.gallery *,div.sidebar div,div.sidebar h3,div.sidebar ul {
+	clear: both;
 	margin: 0;
 	padding: 0;
 }

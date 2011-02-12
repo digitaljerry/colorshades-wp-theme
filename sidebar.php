@@ -1,3 +1,6 @@
+<div class="outer_content">
+	<div class="content">
+
 	<div id="primary" class="sidebar">
 		<ul class="xoxo">
 <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar(1) ) : // begin primary sidebar widgets ?>
@@ -7,27 +10,37 @@
 				<ul>
 <?php wp_list_pages('title_li=&sort_column=menu_order' ) ?>
 				</ul>
+				
+				<div class="clear: both;"></div>
 			</li>
 
 			<li id="categories">
 				<h3><?php _e( 'Categories', 'coloshades' ) ?></h3>
 				<ul>
 <?php wp_list_categories('title_li=&show_count=0&hierarchical=1') ?> 
-
 				</ul>
+				
+				<div class="clear: both;"></div>
 			</li>
 
 			<li id="archives">
 				<h3><?php _e( 'Archives', 'coloshades' ) ?></h3>
 				<ul>
 <?php wp_get_archives('type=monthly') ?>
-
 				</ul>
+				
+				<div class="clear: both;"></div>
 			</li>
 <?php endif; // end primary sidebar widgets  ?>
 		</ul>
 	</div><!-- #primary .sidebar -->
+	</div><!--  .content -->
+</div><!--  .outer_content -->
 
+<div style="clear: both;"></div>
+
+<div class="outer_content">
+	<div class="content">
 	<div id="secondary" class="sidebar">
 		<ul class="xoxo">
 <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar(2) ) : // begin secondary sidebar widgets ?>
@@ -39,6 +52,7 @@
 						<input type="submit" class="button" value="<?php _e( 'Find', 'coloshades' ) ?>" tabindex="2" />
 					</div>
 				</form>
+				
 			</li>
 
 <?php wp_list_bookmarks('title_before=<h3>&title_after=</h3>&show_images=1') ?>
@@ -49,6 +63,8 @@
 					<li><a href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'coloshades' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All posts', 'coloshades' ) ?></a></li>
 					<li><a href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'coloshades' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" rel="alternate" type="application/rss+xml"><?php _e( 'All comments', 'coloshades' ) ?></a></li>
 				</ul>
+				
+				<div class="clear: both;"></div>
 			</li>
 
 			<li id="meta">
@@ -60,7 +76,12 @@
 					<?php wp_meta() ?>
 
 				</ul>
+				
+				<div class="clear: both;"></div>
 			</li>
 <?php endif; // end secondary sidebar widgets  ?>
 		</ul>
 	</div><!-- #secondary .sidebar -->
+
+	</div><!--  .content -->
+</div><!--  .outer_content -->
